@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: 'Candara', 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #9defff, #00c0dd);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #converter {
+            background: linear-gradient(to bottom, #00bbff, #57f7df);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        #converter:hover {
+            background: linear-gradient(to bottom, #57f7df, #00bbff);
+        }
+
+        h2 {
+            color: black;
+            font-size: 35px;
+            font-weight: 800;
+        }
+
+        select,
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: calc(100% - 20px);
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 150px;
+            background-color: #07a355;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #4df788;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .text {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="converter">
+        <h2>Temperature Converter</h2>
+        <label class="text" for="inputValue">Input Value:</label>
+        <input type="number" id="inputValue" placeholder="Enter temperature">
+
+        <label class="text" for="inputFormat">Input Format:</label>
+        <select id="inputFormat">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <label class="text" for="outputFormat">Output Format:</label>
+        <select id="outputFormat">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <button onclick="convertTemperature()">Convert</button>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const inputValue = parseFloat(document.getElementById("inputValue").value);
+            const inputFormat = document.getElementById("inputFormat").value;
+            const outputFormat = document.getElementById("outputFormat").value;
+
+            let result;
+            switch (inputFormat) {
+                case "celsius":
+                    result = convertCelsius(inputValue, outputFormat);
+                    break;
+                case "fahrenheit":
+                    result = convertFahrenheit(inputValue, outputFormat);
+                    break;
+                case "kelvin":
+                    result = convertKelvin(inputValue, outputFormat);
+                    break;
+                default:
+                    result = "Invalid input format";
+            }
+
+            document.getElementById("output").innerText = `${inputValue} ${inputFormat} = ${result} ${outputFormat}`;
+        }
+
+        function convertCelsius(value, outputFormat) {
+            switch (outputFormat) {
+                case "celsius":
+                    return value;
+                case "fahrenheit":
+                    return (value * 9 / 5) + 32;
+                case "kelvin":
+                    return value + 273.15;
+                default:
+                    return "Invalid output format";
+            }
+        }
+
+        function convertFahrenheit(value, outputFormat) {
+            switch (outputFormat) {
+                case "celsius":
+                    return (value - 32) * 5 / 9;
+                case "fahrenheit":
+                    return value;
+                case "kelvin":
+                    return (value - 32) * 5 / 9 + 273.15;
+                default:
+                    return "Invalid output format";
+            }
+        }
+
+        function convertKelvin(value, outputFormat) {
+            switch (outputFormat) {
+                case "celsius":
+                    return value - 273.15;
+                case "fahrenheit":
+                    return (value - 273.15) * 9 / 5 + 32;
+                case "kelvin":
+                    return value;
+                default:
+                    return "Invalid output format";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

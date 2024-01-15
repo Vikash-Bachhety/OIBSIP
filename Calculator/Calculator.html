@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #38fc31, #e1fcd7);
+            height: 100vh;
+            margin: 20;
+        }
+
+        #calculator {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin-left: 100px;
+            background: linear-gradient(to right, #ff7835, #ff2f33);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+            height: 500px;
+            width: 350px;
+            border: 5px solid #ff7835;
+            border-radius: 15px;
+        }
+
+        #display {
+            margin-top: 20px;
+            padding-right: 10px;
+            height: 60px;
+            width: 320px;
+            font-size: 32px;
+            letter-spacing: 0.4px;
+            text-align: right;
+            font-weight: 500;
+            background-color: #fac7ae;
+            color: black;
+            border-radius: 15px;
+        }
+        #calculator-description {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            color: rgb(0, 0, 0);
+            text-align: left;
+            margin-left: 100px;
+            margin-right: 40px;
+        }
+        #calculator-heading {
+            display: inline;
+            font-family: 'Arial', sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: rgba(62, 62, 213, 0.663);
+            border: 0.5px solid rgba(0, 0, 0, 0.374);
+            border-radius: 30%;
+            background-color: white;
+            color: rgb(0, 0, 0);
+            margin: 10px;
+            height: 40px;
+            width: 70px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator-description">
+        <div id="calculator-heading">CALCULATOR</div>
+        <p>Perform quick and accurate calculations with style!</p>
+        <p>Calculor redefines the essence of calculators,<br> marrying functionality with aesthetics. <br> The background
+            gradient, transitioning from fiery oranges to intense reds, infuses energy into its sleek design. <br>The bold
+            "Calculor" heading commands attention, setting the stage for a tool that goes <br> beyond the ordinary. Its
+            efficiency in quick and accurate calculations<br> is complemented by an elegant interface.</p>
+    </div>
+
+    <div id="calculator">
+        <input id="display" disabled>
+        <br>
+        <button class="button" onclick="appendNumber('1')">1</button>
+        <button class="button" onclick="appendNumber('2')">2</button>
+        <button class="button" onclick="appendNumber('3')">3</button>
+        <button class="button" onclick="appendNumber('4')">4</button>
+        <button class="button" onclick="appendNumber('5')">5</button>
+        <button class="button" onclick="appendNumber('6')">6</button>
+        <button class="button" onclick="appendNumber('7')">7</button>
+        <button class="button" onclick="appendNumber('8')">8</button>
+        <button class="button" onclick="appendNumber('9')">9</button>
+        <button class="button" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="appendNumber('0')">0</button>
+        <button class="button" onclick="deleteLast()">Del</button>
+        <button class="button" onclick="appendOperator('+')">+</button>
+        <button class="button" onclick="appendOperator('-')">-</button>
+        <button class="button" onclick="appendOperator('*')">*</button>
+        <button class="button" onclick="appendOperator('/')">/</button>
+        <button class="button" onclick="appendOperator('.')">.</button>
+        <button class="button" onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendNumber(number) {
+            display.value = display.value + number;
+        }
+
+        function appendOperator(operator) {
+            display.value = display.value + operator;
+        }
+
+        function calculate() {
+            try {
+                let result = eval(display.value);
+
+                if (!isFinite(result)) {
+                    throw new Error('Error');
+                }
+
+                display.value = result;
+            } catch (error) {
+                display.value = '0';
+            }
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+    </script>
+</body>
+
+</html>
